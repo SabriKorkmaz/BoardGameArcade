@@ -1,117 +1,41 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-import React, {PropsWithChildren} from 'react';
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    useColorScheme,
-    View,
-} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Landing from "./src/routes/Landing";
+import Board from "./src/routes/Board";
+import Multiplayer from "./src/routes/Multiplayer";
+import How2Play from "./src/routes/How2Play";
+import Leaderboards from "./src/routes/Leaderboards";
+import Invite from "./src/routes/Invite";
+import {NativeBaseProvider} from "native-base";
+import {colorModeManager, theme} from "./config";
 
-import {
-    Colors,
-    DebugInstructions,
-    Header,
-    LearnMoreLinks,
-    ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {useState} from "react";
-import {useEffect} from "react";
+export type RootStackParamList = {
+    Landing: undefined;
+    Board: undefined;
+    Multiplayer: undefined;
+    Leaderboards: undefined;
+    How2Play: undefined;
+    Invite: undefined;
 
-const Section: React.FC<PropsWithChildren<{
-    title: string;
-}>> = ({children, title}) => {
-    const isDarkMode = useColorScheme() === 'dark';
-    return (
-        <View style={styles.sectionContainer}>
-            <Text
-                style={[
-                    styles.sectionTitle,
-                    {
-                        color: isDarkMode ? Colors.white : Colors.black,
-                    },
-                ]}>
-                {title}
-            </Text>
-            <Text
-                style={[
-                    styles.sectionDescription,
-                    {
-                        color: isDarkMode ? Colors.light : Colors.dark,
-                    },
-                ]}>
-                {children}
-            </Text>
-        </View>
-    );
 };
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
-    const isDarkMode = useColorScheme() === 'dark';
-
-    const backgroundStyle = {
-        backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-    };
-
     return (
-        <SafeAreaView style={backgroundStyle}>
-            <StatusBar
-                barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-                backgroundColor={backgroundStyle.backgroundColor}
-            />
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                style={backgroundStyle}>
-                <Header/>
-                <View
-                    style={{
-                        backgroundColor: isDarkMode ? Colors.black : Colors.white,
-                    }}>
-
-                    <Section title="Sabri Korkmazzz">
-                        <ReloadInstructions/>
-                    </Section>
-                    <Section title="Debug">
-
-                        <DebugInstructions/>
-                    </Section>
-                    <Section title="Learn More">
-                        Read the docs to discover what to do next: akif
-                    </Section>
-                    <LearnMoreLinks/>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Landing">
+                    <Stack.Screen name="Landing" component={Landing} options={{title: 'boardBox', headerShown: false}}/>
+                    <Stack.Screen name="Board" component={Board}/>
+                    <Stack.Screen name="Multiplayer" component={Multiplayer}/>
+                    <Stack.Screen name="Leaderboards" component={Leaderboards}/>
+                    <Stack.Screen name="How2Play" component={How2Play}/>
+                    <Stack.Screen name="Invite" component={Invite} options={{title: 'Invite Friends'}}/>
+                </Stack.Navigator>
+            </NavigationContainer>
+        </NativeBaseProvider>
     );
 };
-
-const styles = StyleSheet.create({
-    sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
-    },
-    sectionTitle: {
-        fontSize: 24,
-        fontWeight: '600',
-    },
-    sectionDescription: {
-        marginTop: 8,
-        fontSize: 18,
-        fontWeight: '400',
-    },
-    highlight: {
-        fontWeight: '700',
-    },
-});
 
 export default App;

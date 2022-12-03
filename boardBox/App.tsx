@@ -7,7 +7,7 @@
  *
  * @format
  */
-import React, {type PropsWithChildren} from 'react';
+import React, {PropsWithChildren} from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -78,7 +78,7 @@ const App = () => {
                         backgroundColor: isDarkMode ? Colors.black : Colors.white,
                     }}>
 
-                    <Section title="Sabri Korkmaz">
+                    <Section title="Sabri Korkmazzz">
                         <ReloadInstructions/>
                     </Section>
                     <Section title="Debug">
@@ -86,7 +86,7 @@ const App = () => {
                         <DebugInstructions/>
                     </Section>
                     <Section title="Learn More">
-                        Read the docs to discover what to do next: Sabri
+                        Read the docs to discover what to do next: akif
                     </Section>
                     <LearnMoreLinks/>
                 </View>

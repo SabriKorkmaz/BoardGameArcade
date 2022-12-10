@@ -30,10 +30,14 @@ const boardBoxTheme = extendTheme({
             300: "#b12139",
             400: "#6e2330"
         },
-        // Redefining only one shade, rest of the color will remain same.
-        amber: {
-            400: '#d97706',
-        },
+    },
+    components: {
+        Button: {
+            baseStyle: {
+                bg: '#fff1f3',
+                backgroundColor: '#fff1f3',
+            }
+        }
     },
     config: {
         // Changing initialColorMode to 'dark'

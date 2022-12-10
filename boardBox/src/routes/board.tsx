@@ -3,18 +3,18 @@ import {Button, Text, View} from "react-native";
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from "../../App";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'How2Play'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'board'>;
 
-const How2Play = ({navigation, route}: Props) => {
+const Board = ({navigation, route}: Props) => {
 
     return <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <Text>Landing</Text>
         <Button
             title="Landing"
             onPress={() => {
-                navigation.navigate("Landing")
+                navigation.navigate("landing")
             }}
         />
     </View>;
 };
-export default How2Play
+export default Board

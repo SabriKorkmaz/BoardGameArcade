@@ -3,7 +3,7 @@ import {Button, Text, View} from "react-native";
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from "../../App";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Multiplayer'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'multiplayer'>;
 
 const Multiplayer = ({navigation, route}: Props) => {
 
@@ -12,7 +12,7 @@ const Multiplayer = ({navigation, route}: Props) => {
         <Button
             title="Landing"
             onPress={() => {
-                navigation.navigate("Landing")
+                navigation.navigate("landing")
             }}
         />
     </View>;

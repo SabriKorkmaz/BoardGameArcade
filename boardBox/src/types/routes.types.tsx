@@ -11,5 +11,16 @@ export interface IBBRoutes {
 
 export interface IBBRouteItem {
     name: any,
-    title?: string
+    options?: Partial<IBBRouteItemOptions>
+}
+
+export interface IBBRouteItemOptions {
+    title: string;
+    headerTitle: string;
+    headerTransparent: boolean;
+    headerShown: boolean,
+    headerBackImageSource: any,
+    headerBackTitleVisible: boolean,
+    headerBackImage: any,
+    headerStyle: any
 }

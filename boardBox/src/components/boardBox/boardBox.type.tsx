@@ -9,6 +9,7 @@ export interface BoardBoxCell {
     disabled?: boolean,
     clicked?: () => void
     style: any,
+    styleActive: any
 }
 
 export interface BoardBoxStyle {

@@ -7,22 +7,22 @@ const styles = (rowCount: number) => {
     const cellSize = ((width - 10) - 40) / rowCount
 
 
-    return StyleSheet.create({
-        main: {
+    return {
+        "main": {
             width: width,
             height: height,
             justifyContent: "center",
             alignItems: "center",
             overflow: "scroll"
         },
-        row: {} as ViewStyle,
-        col: {
+        "row": {} as ViewStyle,
+        "col": {
             flex: 1,
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "flex-start"
         } as ViewStyle,
-        cell: {
+        "cell": {
             width: cellSize,
             height: cellSize,
             backgroundColor: "rgba(255, 255, 255, .2)",
@@ -31,18 +31,18 @@ const styles = (rowCount: number) => {
             margin: 2,
 
         } as ViewStyle,
-        number: {
+        "number": {
             color: "white",
             fontFamily: 'Roboto',
             fontSize: (cellSize / 5) * 3,
         } as any,
-        numberHolder: {
+        "numberHolder": {
             width: "100%",
             height: "100%",
             justifyContent: "center",
             alignItems: "center"
         },
-        cellActive: {
+        "cellActive": {
             width: cellSize,
             height: cellSize,
             backgroundColor: "rgba(255, 255, 255, .2)",
@@ -56,7 +56,7 @@ const styles = (rowCount: number) => {
             borderWidth: 1
         }
 
-    });
+    };
 }
 
 export default styles;

@@ -1,6 +1,6 @@
 import {BoardBoxCell, BoardBoxOptions, BoardBoxStyle} from "./boardBox.type";
-import React from "react";
-import {StyleSheetProperties, Text, TouchableOpacity, View} from "react-native";
+import React, {useEffect, useRef, useState} from "react";
+import {Animated, StyleSheet, StyleSheetProperties, Text, TouchableOpacity, View} from "react-native";
 import styles from "./boardBox.style";
 
 let board: BoardBoxCell[][] = [[]]
@@ -8,11 +8,76 @@ let currentNumber = 1;
 let style: Partial<BoardBoxStyle> = {} as Partial<BoardBoxStyle>
 
 const BoardBox = (options: BoardBoxOptions) => {
+    const [boardState, setBoardState] = useState(Array.from({length: options.size}, () => Array.from({length: options.size}, () => null) as any))
     style = styles(options.size);
-    for (let x = 0; x < options.size; x++) {
-        board[x] = Array(options.size).fill(null).map((e, i) => {
-            return {hasNumber: false, disabled: true, number: undefined, style: style.cell}
-        }) as BoardBoxCell[]
+
+    useEffect(() => {
+        let copy = [...boardState];
+        for (let i = 0; i < options.size; i++) {
+            for (let j = 0; j < options.size; j++) {
+                copy[i][j] = {
+                    hasNumber: false,
+                    disabled: false,
+                    style: style["cell"],
+                    styleActive: style["cellActive"],
+                    number: undefined,
+                }
+            }
+        }
+        setBoardState(copy);
+    }, [])
+    useEffect(() => {
+    }, [boardState])
+    const cellStyle = (x: number, y: number) => {
+        let copy = [...boardState];
+        return copy[x][y]?.hasNumber ? copy[x][y]?.styleActive : copy[x][y]?.style
+    }
+    const cell = (x: number, y: number) => {
+        if (x != undefined && y != undefined) {
+            if (boardState[x]) {
+                return (
+                    <View style={cellStyle(x, y)}>
+                        <TouchableOpacity style={style?.numberHolder}
+                                          onPress={() =>
+                                              click(x, y)
+                                          }><Text
+                            style={style.number}>{boardState[x][y]?.number}</Text></TouchableOpacity></View>)
+            }
+        }
+
+    }
+
+    const click = (x: number, y: number) => {
+        console.log("clicked")
+        let copy = [...boardState];
+        if (copy[x][y].hasNumber) {
+            return
+        } else {
+            copy[x][y].style = style.cellActive
+            copy[x][y].number = currentNumber;
+            copy[x][y].hasNumber = true
+        }
+        setBoardState(copy)
+        currentNumber++
+
+    }
+    const row = (size: number) => {
+        const rows = [];
+        for (let i = 0; i < size; i++) {
+            rows.push(col(size, i))
+        }
+        return (<View style={style.row}>
+            {rows}
+        </View>)
+    }
+    const col = (size: number, y: number) => {
+        const cols = [];
+        for (let i = 0; i < size; i++) {
+            cols.push(cell(i, y))
+        }
+        return (<View style={style.col}>
+            {cols}
+        </View>)
     }
     return (
         <View style={style.main}>
@@ -21,49 +86,5 @@ const BoardBox = (options: BoardBoxOptions) => {
     )
 }
 //x and y are coordinate
-const click = (x: number, y: number) => {
-    let cell = board[x][y];
-    if (cell.hasNumber) {
-        cell.number = undefined
-        cell.hasNumber = false
-        cell.style = style.cell
-        return
-    }
-    cell.style = style.cellActive
-    cell.number = currentNumber;
-    cell.hasNumber = true
-    board[x][y] = cell
-    currentNumber++
-
-}
-const cellStyle = (x: number, y: number) => {
-    console.log((board[x][y].style), "style")
-    return board[x][y].style
-}
-const cell = (x: number, y: number) => {
-    let current = board[x][y]
-    return (<View style={cellStyle(x, y)}><TouchableOpacity style={style.numberHolder} onPress={() => {
-            click(x, y)
-        }}><Text style={style.number}>{current.number}</Text></TouchableOpacity></View>
-    )
-}
-const row = (size: number) => {
-    const rows = [];
-    for (let i = 0; i < size; i++) {
-        rows.push(col(size, i))
-    }
-    return (<View style={style.row}>
-        {rows}
-    </View>)
-}
-const col = (size: number, y: number) => {
-    const cols = [];
-    for (let i = 0; i < size; i++) {
-        cols.push(cell(i, y))
-    }
-    return (<View style={style.col}>
-        {cols}
-    </View>)
-}
 
 export default BoardBox;

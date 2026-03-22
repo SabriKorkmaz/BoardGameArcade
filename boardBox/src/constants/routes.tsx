@@ -4,7 +4,7 @@ import {NativeStackNavigationConfig} from "react-native-screens/lib/typescript/n
 const routes: IBBRoutes = {
     board: {name: "board", options: {headerShown: false}},
     how2Play: {name: "how2Play"},
-    invite: {name: "invite", options: {title: "Invite Friends"}},
+    invite: {name: "invite", options: {title: "Analyst Agent"}},
     landing: {name: "landing", options: {title: 'boardBox',}},
     leaderboards: {name: "leaderboards", options: {title: 'Leaderboards'}},
     multiplayer: {

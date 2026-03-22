@@ -35,8 +35,8 @@ const Landing = ({navigation, route}: LandingProps) => {
             </VStack>
             <HStack justifyContent="center" alignItems="center">
                 <Button mr={3} minWidth={100}
-                        onPress={() => navigate(BBConstants.routes.how2Play.name)}><Text
-                    color="primary.200">Rate Us!</Text></Button>
+                        onPress={() => navigate(BBConstants.routes.invite.name)}><Text
+                    color="primary.200">Analist Agent</Text></Button>
                 <Button mr={3} minWidth={100}
                         onPress={() => navigate(BBConstants.routes.how2Play.name)}><Text
                     color="primary.200">How2Play</Text></Button>
